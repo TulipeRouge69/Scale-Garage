@@ -225,6 +225,19 @@ body.scrolled .header {
   .large, .medium, .small {
     min-height: 220px;
   }
+/* --- Zone de texte dans la première case --- */
+.text-zone {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 15px 20px;
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 15px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
 
   .header {
     height: 55px;
