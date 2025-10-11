@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* --- Header --- */
+.header {
+  width: 95%;
+  height: 70px;
+  background: rgba(200, 200, 200, 0.5);
+  border-radius: 35px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+}
+
+.menu-icon span {
+  display: block;
+  height: 4px;
+  background: white;
+  border-radius: 2px;
+}
+
+.logo {
+  background: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* --- Grid principale --- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  width: 95%;
+  height: calc(100vh - 100px);
+  margin-top: 10px;
+}
+
+.card {
+  background-color: #497b59;
+  border-radius: 8px;
+}
+
+/* Placement desktop */
+.large {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+.medium {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.small {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .large,
+  .medium,
+  .small {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    height: 250px;
+  }
+
+  .header {
+    width: 90%;
+    height: 60px;
+    border-radius: 30px;
+  }
+
+  .logo {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+  .menu-icon {
+    width: 22px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: 14px;
+  }
+
+  .grid {
+    width: 90%;
+    gap: 8px;
+  }
+
+  .large,
+  .medium,
+  .small {
+    height: 200px;
+  }
+
+  .header {
+    height: 55px;
+    border-radius: 25px;
+  }
+}
