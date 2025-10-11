@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maquette Responsive</title>
+  <title>Maquette Menu Déroulant</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="header">
-    <div class="menu-icon">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="menu-container">
+      <div class="menu-icon" id="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="dropdown" id="dropdown-menu">
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">Profil</a></li>
+          <li><a href="#">Projets</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
     </div>
     <div class="logo">Sh</div>
   </header>
@@ -21,5 +31,23 @@
     <div class="card large"></div>
     <div class="card small"></div>
   </main>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const dropdown = document.getElementById('dropdown-menu');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+      menuBtn.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+        dropdown.classList.remove('active');
+        menuBtn.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
