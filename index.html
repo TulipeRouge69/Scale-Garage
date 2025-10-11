@@ -23,7 +23,11 @@
         </ul>
       </nav>
     </div>
-    <div class="logo">Sh</div>
+
+    <!-- 🔵 Nouveau logo image -->
+    <div class="logo">
+      <img src="ChatGPT Image 11 oct. 2025, 12_16_49.png" alt="Logo Studio Halo">
+    </div>
   </header>
 
   <main class="grid">
@@ -46,6 +50,14 @@
       if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
         dropdown.classList.remove('active');
         menuBtn.classList.remove('open');
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
       }
     });
   </script>
