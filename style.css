@@ -14,7 +14,7 @@ body {
   color: white;
 }
 
-/* --- Header avec effet "liquid glass" --- */
+/* --- Header effet "liquid glass" --- */
 .header {
   position: fixed;
   top: 0;
@@ -29,7 +29,6 @@ body {
   justify-content: space-between;
   z-index: 1000;
 
-  /* 💧 effet verre liquide Apple */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -38,15 +37,29 @@ body {
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Ombre subtile quand on scroll */
 body.scrolled .header {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* --- Espace sous la barre --- */
-.grid {
-  margin-top: 100px;
+/* --- Logo image --- */
+.logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* --- Menu Icon --- */
@@ -126,20 +139,6 @@ body.scrolled .header {
   background: rgba(255,255,255,0.15);
 }
 
-/* --- Logo --- */
-.logo {
-  background: black;
-  color: white;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
-
 /* --- Grid principale --- */
 .grid {
   display: grid;
@@ -148,6 +147,7 @@ body.scrolled .header {
   gap: 10px;
   width: 95%;
   height: calc(100vh - 100px);
+  margin-top: 100px;
 }
 
 .card {
@@ -160,7 +160,6 @@ body.scrolled .header {
   transform: scale(1.02);
 }
 
-/* Hauteur plus grande */
 .medium, .small, .large {
   min-height: 340px;
 }
@@ -189,9 +188,7 @@ body.scrolled .header {
     height: auto;
   }
 
-  .large,
-  .medium,
-  .small {
+  .large, .medium, .small {
     grid-column: 1 / 2;
     grid-row: auto;
     min-height: 260px;
@@ -204,9 +201,8 @@ body.scrolled .header {
   }
 
   .logo {
-    width: 40px;
-    height: 40px;
-    font-size: 13px;
+    width: 45px;
+    height: 45px;
   }
 
   .menu-icon {
@@ -221,9 +217,7 @@ body.scrolled .header {
     gap: 8px;
   }
 
-  .large,
-  .medium,
-  .small {
+  .large, .medium, .small {
     min-height: 220px;
   }
 
