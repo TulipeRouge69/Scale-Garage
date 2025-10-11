@@ -24,14 +24,23 @@ body {
   align-items: center;
   padding: 0 20px;
   justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+/* --- Menu Icon --- */
+.menu-container {
+  position: relative;
 }
 
 .menu-icon {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 25px;
-  height: 18px;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .menu-icon span {
@@ -39,15 +48,71 @@ body {
   height: 4px;
   background: white;
   border-radius: 2px;
+  transition: 0.3s;
 }
 
+.menu-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* --- Dropdown Menu --- */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: rgba(50, 50, 50, 0.95);
+  border-radius: 15px;
+  padding: 10px 0;
+  width: 160px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.dropdown.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown ul {
+  list-style: none;
+}
+
+.dropdown li {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.dropdown a {
+  text-decoration: none;
+  color: white;
+  padding: 8px 12px;
+  display: block;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.dropdown a:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* --- Logo --- */
 .logo {
   background: black;
   color: white;
   font-weight: bold;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +132,12 @@ body {
 
 .card {
   background-color: #497b59;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+
+/* Hauteur plus grande */
+.medium, .small, .large {
+  min-height: 320px;
 }
 
 /* Placement desktop */
@@ -99,7 +169,7 @@ body {
   .small {
     grid-column: 1 / 2;
     grid-row: auto;
-    height: 250px;
+    min-height: 260px;
   }
 
   .header {
@@ -109,22 +179,18 @@ body {
   }
 
   .logo {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     font-size: 13px;
   }
 
   .menu-icon {
-    width: 22px;
-    height: 16px;
+    width: 25px;
+    height: 18px;
   }
 }
 
 @media (max-width: 500px) {
-  body {
-    font-size: 14px;
-  }
-
   .grid {
     width: 90%;
     gap: 8px;
@@ -133,7 +199,7 @@ body {
   .large,
   .medium,
   .small {
-    height: 200px;
+    min-height: 220px;
   }
 
   .header {
