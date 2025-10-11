@@ -11,25 +11,37 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  color: white;
 }
 
-/* --- Header --- */
+/* --- Header avec effet "liquid glass" --- */
 .header {
-  position: fixed;       /* <-- Barre fixée */
+  position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 95%;
   height: 70px;
-  background: rgba(200, 200, 200, 0.5);
   border-radius: 35px;
-  margin-top: 10px;
   display: flex;
   align-items: center;
   padding: 0 20px;
   justify-content: space-between;
   z-index: 1000;
-  backdrop-filter: blur(6px);
+
+  /* 💧 effet verre liquide Apple */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ombre subtile quand on scroll */
+body.scrolled .header {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* --- Espace sous la barre --- */
@@ -75,7 +87,7 @@ body {
   position: absolute;
   top: 60px;
   left: 0;
-  background: rgba(50, 50, 50, 0.95);
+  background: rgba(40, 40, 40, 0.9);
   border-radius: 15px;
   padding: 10px 0;
   width: 160px;
@@ -141,6 +153,11 @@ body {
 .card {
   background-color: #497b59;
   border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 /* Hauteur plus grande */
