@@ -7,11 +7,13 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Styles spécifiques pour la mise en page produit */
+    /* --- Couleurs de base de ta page principale --- */
     body {
-      background-color: #f4f4f4; /* Couleur de base */
+      background: linear-gradient(135deg, #1a1a1a, #000000); /* Fond noir/gris foncé */
+      color: white;
       margin: 0;
       font-family: Arial, sans-serif;
+      min-height: 100vh;
     }
 
     /* --- Conteneur Principal --- */
@@ -20,27 +22,29 @@
       gap: 20px;
       padding: 40px;
       max-width: 1200px;
-      margin: 80px auto 20px; /* Marge en haut pour laisser la place au header */
+      margin: 80px auto 20px;
     }
 
     /* --- Bloc Gauche : Image --- */
     .product-visual {
       flex: 2;
-      background-color: #000; /* Fond noir comme sur l'image */
-      border-radius: 20px;
+      background-color: #111; /* Gris très foncé */
+      border-radius: 30px; /* Bords bien arrondis comme tes cartes */
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 40px;
+      border: 1px solid #333; /* Légère bordure pour le relief */
     }
 
     .product-visual img {
       max-width: 100%;
       height: auto;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     }
 
-    /* --- Bloc Droite : Achat --- */
-    .product-buy-card {
+    /* --- Bloc Droite : Zone d'achat --- */
+    .product-buy-column {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -48,41 +52,49 @@
     }
 
     .info-box {
-      background-color: #000; /* Fond noir */
+      background-color: #000; /* Fond noir pur */
       color: white;
       padding: 40px;
-      border-radius: 20px;
+      border-radius: 30px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      border: 1px solid #333;
     }
 
     .info-box h1 {
-      margin: 0 0 20px 0;
-      font-size: 24px;
-      text-transform: uppercase;
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      letter-spacing: 1px;
     }
 
     .price-tag {
-      font-size: 20px;
-      margin-bottom: 20px;
+      font-size: 22px;
+      color: #bbb;
+      margin-bottom: 25px;
     }
 
     .add-to-cart-btn {
       background-color: #fff;
       color: #000;
       border: none;
-      padding: 12px 30px;
-      border-radius: 12px;
+      padding: 15px 30px;
+      border-radius: 15px;
       font-weight: bold;
       cursor: pointer;
       width: 100%;
-      font-size: 16px;
+      font-size: 18px;
+      transition: transform 0.2s;
     }
 
-    /* --- Bloc Description (en dessous) --- */
+    .add-to-cart-btn:hover {
+      transform: scale(1.03);
+      background-color: #f0f0f0;
+    }
+
+    /* --- Bloc Description (En bas) --- */
     .product-description-footer {
       max-width: 1200px;
       margin: 0 auto 60px;
@@ -90,17 +102,23 @@
     }
 
     .desc-content {
-      background-color: #000;
+      background-color: #111;
+      color: #ccc;
+      padding: 40px;
+      border-radius: 30px;
+      border: 1px solid #333;
+    }
+
+    .desc-content h3 {
       color: white;
-      padding: 30px;
-      border-radius: 20px;
-      min-height: 150px;
+      margin-top: 0;
     }
 
     /* Responsive */
     @media (max-width: 850px) {
       .product-layout {
         flex-direction: column;
+        padding: 20px;
       }
     }
   </style>
@@ -130,33 +148,33 @@
 
   <main>
     <div class="product-layout">
-      
       <div class="product-visual">
         <img src="Remove BG.png" alt="Audi RS6">
       </div>
 
-      <div class="product-buy-card">
+      <div class="product-buy-column">
         <div class="info-box">
           <h1>AUDI RS6</h1>
           <div class="price-tag">89.99€</div>
           <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
         </div>
         
-        <div class="info-box" style="flex-grow: 1; min-height: 100px;">
-          </div>
+        <div class="info-box" style="flex-grow: 1; min-height: 120px; background: #080808;">
+          <p style="color: #666; font-size: 0.9em;">Échelle 1/18 - Édition Limitée</p>
+        </div>
       </div>
     </div>
 
     <div class="product-description-footer">
       <div class="desc-content">
         <h3>Description</h3>
-        <p>Réplique fidèle de l'Audi RS6 avec finitions premium. Inclus le coffre de toit amovible.</p>
+        <p>Découvrez l'Audi RS6 dans sa version miniature la plus détaillée. Peinture gris Nardo, coffre de toit fonctionnel et finitions intérieures réalistes.</p>
       </div>
     </div>
   </main>
 
   <script>
-    /* SCRIPT DU MENU (Identique à l'original) */
+    /* Script du menu burger */
     const menuBtn = document.getElementById('menu-btn');
     const dropdown = document.getElementById('dropdown-menu');
 
@@ -166,15 +184,8 @@
       menuBtn.classList.toggle('open');
     });
 
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
-        dropdown.classList.remove('active');
-        menuBtn.classList.remove('open');
-      }
-    });
-
     function addToCart() {
-      alert("Produit ajouté au panier !");
+      alert("Ajouté au panier !");
     }
   </script>
 </body>
