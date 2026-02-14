@@ -5,91 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audi RS6 - Scale Garage</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .product-container {
+      display: flex;
+      gap: 40px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .product-images {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .product-images img {
+      width: 100%;
+      border: 2px solid green;
+      margin-bottom: 15px;
+    }
+
+    .product-info {
+      flex: 1;
+      min-width: 300px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .product-info h1 {
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .add-to-cart {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .add-to-cart:hover {
+      background-color: #45a049;
+    }
+
+    .product-description {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 40px 40px 40px;
+    }
+
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="menu-container">
-      <div class="menu-icon" id="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="dropdown" id="dropdown-menu">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Cart</a></li>
-        </ul>
-      </nav>
+
+<header class="header">
+  <div class="menu-container">
+    <div class="menu-icon" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="dropdown" id="dropdown-menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Cart</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="logo">
+    <img src="ScaleGarage.png" alt="Logo Scale Garage">
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION PRINCIPALE PRODUIT -->
+  <div class="product-container">
+
+    <!-- Images à gauche -->
+    <div class="product-images">
+      <img src="Remove BG.png" alt="Audi RS6">
+      <!-- Tu peux ajouter d'autres images ici -->
+      <!-- <img src="image2.png" alt="Audi RS6 vue arrière"> -->
     </div>
 
-    <!-- Logo principal -->
-    <div class="logo">
-      <img src="ScaleGarage.png" alt="Logo Scale Garage">
+    <!-- Infos à droite -->
+    <div class="product-info">
+      <h1>Audi RS6</h1>
+      <div class="price">€89.99</div>
+
+      <button class="add-to-cart" onclick="addToCart()">
+        Add to Cart
+      </button>
     </div>
-  </header>
 
-  <main class="grid" style="padding: 20px;">
-    <!-- Carte principale de la voiture -->
-    <div class="card medium" style="margin: 0 auto; max-width: 600px;">
-      <div class="text-zone" style="text-align: center;">
-        <!-- Image de la voiture -->
-        <div class="car-image" style="margin-bottom: 20px;">
-          <img src="Remove BG.png" alt="Audi RS6" style="max-width: 100%; height: auto; border: 2px solid green;">
-        </div>
+  </div>
 
-        <!-- Nom et description -->
-        <h2>Audi RS6</h2>
-        <p>
-          Découvrez cette magnifique Audi RS6, avec un design élégant, des performances incroyables et un confort exceptionnel. Personnalisez votre voiture et ajoutez-la directement à votre panier pour l’acheter sur notre site.
-        </p>
+  <!-- DESCRIPTION EN DESSOUS -->
+  <div class="product-description">
+    <h2>Description</h2>
+    <p>
+      Découvrez la puissance et l'élégance de l’Audi RS6. 
+      Cette miniature haut de gamme reproduit fidèlement les détails du modèle original.
+      Idéale pour les passionnés d’automobile et les collectionneurs.
+    </p>
+    <p>
+      ✔ Finitions premium  
+      ✔ Design réaliste  
+      ✔ Produit exclusif Scale Garage  
+    </p>
+  </div>
 
-        <!-- Bouton Add to Cart -->
-        <button onclick="addToCart()" style="
-          background-color: #4CAF50;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          font-weight: bold;
-          cursor: pointer;
-        ">
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  </main>
+</main>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const dropdown = document.getElementById('dropdown-menu');
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const dropdown = document.getElementById('dropdown-menu');
 
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle('active');
-      menuBtn.classList.toggle('open');
-    });
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+    menuBtn.classList.toggle('open');
+  });
 
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
-        dropdown.classList.remove('active');
-        menuBtn.classList.remove('open');
-      }
-    });
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
-    });
-
-    // Fonction Add to Cart
-    function addToCart() {
-      alert("Audi RS6 ajoutée au panier !");
-      // Ici tu pourras ajouter ton code pour gérer le panier réel
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+      dropdown.classList.remove('active');
+      menuBtn.classList.remove('open');
     }
-  </script>
+  });
+
+  function addToCart() {
+    alert("Audi RS6 ajoutée au panier !");
+  }
+</script>
+
 </body>
 </html>
