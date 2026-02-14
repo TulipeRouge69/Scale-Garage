@@ -6,7 +6,6 @@
   <title>Scale Garage - Accueil</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* --- Couleurs et Fond (Harmonisé avec la page produit) --- */
     body {
       background: linear-gradient(135deg, #1a1a1a, #000000);
       color: white;
@@ -15,18 +14,19 @@
       min-height: 100vh;
     }
 
-    /* --- Grille d'origine --- */
+    /* --- La Grille Magique --- */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-auto-rows: minmax(200px, auto); /* Garde la structure flexible d'avant */
+      /* On crée deux colonnes de largeur égale (1fr 1fr) */
+      grid-template-columns: 1fr 1fr; 
+      /* On crée deux lignes de hauteur égale */
+      grid-template-rows: auto auto; 
       gap: 20px;
       padding: 40px;
       max-width: 1200px;
       margin: 80px auto 0;
     }
 
-    /* --- Style des blocs (Nouveau Look, Tailles d'avant) --- */
     .card {
       background-color: #111;
       border-radius: 30px;
@@ -37,29 +37,23 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #555;
+    /* --- Alignement selon ton image --- */
+    
+    /* Bloc de droite : il commence à la colonne 2 et prend 2 lignes de haut */
+    .card.right-tall {
+      grid-column: 2;
+      grid-row: 1 / 3; 
+      background-color: #000; /* Plus sombre comme demandé */
     }
 
-    /* --- Tailles spécifiques d'origine --- */
-    .medium {
-      grid-row: span 2;
+    /* Blocs de gauche : ils restent naturellement en colonne 1 */
+    .card.left-small {
+      grid-column: 1;
     }
 
-    .large {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    .small {
-      grid-row: span 1;
-    }
-
-    /* --- Contenu des cartes --- */
     .car-image img {
       max-width: 100%;
       height: auto;
@@ -68,48 +62,35 @@
 
     .text-zone {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     .text-zone p {
       font-size: 18px;
       font-weight: bold;
       text-transform: uppercase;
-      margin: 5px 0;
     }
 
-    /* Responsive */
+    /* Responsive : sur téléphone, on repasse tout en une colonne */
     @media (max-width: 768px) {
-      .large { grid-column: span 1; }
-      .grid { padding: 20px; }
+      .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .card.right-tall {
+        grid-column: 1;
+        grid-row: auto;
+      }
     }
   </style>
 </head>
 <body>
 
   <header class="header">
-    <div class="menu-container">
-      <div class="menu-icon" id="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="dropdown" id="dropdown-menu">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Cart</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="logo">
-      <img src="ScaleGarage.png" alt="Logo Scale Garage">
-    </div>
-  </header>
+    </header>
 
   <main class="grid">
-    <div class="card medium">
+    <div class="card left-small">
       <div class="text-zone">
         <div class="car-image">
           <a href="presentation-voiture.html">
@@ -120,35 +101,19 @@
       </div>
     </div>
 
-    <div class="card large" style="background-color: #000;">
-       <p style="color: #444;">Publicité ou Image Large</p>
+    <div class="card left-small">
+       <div class="text-zone">
+          <p>Accessoires</p>
+       </div>
     </div>
 
-    <div class="card small">
-       <p style="color: #666;">Accessoires</p>
-    </div>
-
-    <div class="card small">
-       <p style="color: #666;">Contactez-nous</p>
+    <div class="card right-tall">
+       <div class="text-zone">
+          <p>Nouvelle Collection</p>
+          <span style="color: #666;">Édition 2024</span>
+       </div>
     </div>
   </main>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const dropdown = document.getElementById('dropdown-menu');
-
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle('active');
-      menuBtn.classList.toggle('open');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
-        dropdown.classList.remove('active');
-        menuBtn.classList.remove('open');
-      }
-    });
-  </script>
 </body>
 </html>
