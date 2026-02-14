@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scale Garage - Accueil</title>
-  <link rel="stylesheet" href="style.css">
   <style>
+    /* --- CONFIGURATION DES COULEURS ET FOND --- */
     body {
       background: linear-gradient(135deg, #1a1a1a, #000000);
       color: white;
@@ -14,17 +14,87 @@
       min-height: 100vh;
     }
 
-    /* --- La Grille Magique --- */
+    /* --- HEADER (Menu à gauche, Logo à droite) --- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      box-sizing: border-box;
+      z-index: 1000;
+      height: 70px;
+    }
+
+    /* Bouton Menu Burger */
+    .menu-icon {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 1001;
+    }
+
+    .menu-icon span {
+      display: block;
+      width: 30px;
+      height: 30px;
+      height: 3px;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+    /* Menu Déroulant (Dropdown) */
+    .dropdown {
+      position: absolute;
+      top: 70px;
+      left: -250px; /* Caché par défaut */
+      background-color: #111;
+      width: 200px;
+      height: auto;
+      border-radius: 0 0 20px 0;
+      transition: 0.4s;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .dropdown.active {
+      left: 0;
+    }
+
+    .dropdown ul {
+      list-style: none;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .dropdown ul li {
+      margin-bottom: 15px;
+    }
+
+    .dropdown ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    /* Logo à droite */
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    /* --- GRILLE PRINCIPALE (Mosaïque comme sur l'image) --- */
     .grid {
       display: grid;
-      /* On crée deux colonnes de largeur égale (1fr 1fr) */
-      grid-template-columns: 1fr 1fr; 
-      /* On crée deux lignes de hauteur égale */
-      grid-template-rows: auto auto; 
+      grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
+      grid-template-rows: auto auto;    /* Deux lignes égales */
       gap: 20px;
       padding: 40px;
       max-width: 1200px;
-      margin: 80px auto 0;
+      margin: 100px auto 0; /* Marge pour le header */
     }
 
     .card {
@@ -37,41 +107,41 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
 
-    /* --- Alignement selon ton image --- */
-    
-    /* Bloc de droite : il commence à la colonne 2 et prend 2 lignes de haut */
-    .card.right-tall {
-      grid-column: 2;
-      grid-row: 1 / 3; 
-      background-color: #000; /* Plus sombre comme demandé */
+    .card:hover {
+      border-color: #555;
     }
 
-    /* Blocs de gauche : ils restent naturellement en colonne 1 */
+    /* Bloc de gauche (Petit) */
     .card.left-small {
       grid-column: 1;
     }
 
+    /* Bloc de droite (Grand - prend 2 lignes) */
+    .card.right-tall {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      background-color: #000;
+    }
+
+    /* --- CONTENU --- */
     .car-image img {
       max-width: 100%;
       height: auto;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
     }
 
-    .text-zone {
-      text-align: center;
-      margin-top: 10px;
-    }
-
     .text-zone p {
       font-size: 18px;
       font-weight: bold;
       text-transform: uppercase;
+      margin-top: 15px;
+      text-align: center;
     }
 
-    /* Responsive : sur téléphone, on repasse tout en une colonne */
+    /* Responsive mobile */
     @media (max-width: 768px) {
       .grid {
         grid-template-columns: 1fr;
@@ -80,6 +150,7 @@
       .card.right-tall {
         grid-column: 1;
         grid-row: auto;
+        min-height: 300px;
       }
     }
   </style>
@@ -87,7 +158,25 @@
 <body>
 
   <header class="header">
-    </header>
+    <div class="menu-container">
+      <div class="menu-icon" id="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="dropdown" id="dropdown-menu">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Cart</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="logo">
+      <img src="ScaleGarage.png" alt="Logo Scale Garage">
+    </div>
+  </header>
 
   <main class="grid">
     <div class="card left-small">
@@ -110,10 +199,27 @@
     <div class="card right-tall">
        <div class="text-zone">
           <p>Nouvelle Collection</p>
-          <span style="color: #666;">Édition 2024</span>
+          <span style="color: #666;">Édition Limitée</span>
        </div>
     </div>
   </main>
 
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const dropdown = document.getElementById('dropdown-menu');
+
+    // Ouvrir / Fermer le menu
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+    });
+
+    // Fermer si on clique ailleurs sur l'écran
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
