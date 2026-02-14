@@ -188,7 +188,7 @@ body.scrolled .header {
 /* --- Image de la voiture dans la première carte --- */
 .car-image {
   width: 100%;
-  height: 180px;
+  height: 240px;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 15px;
