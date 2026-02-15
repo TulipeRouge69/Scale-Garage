@@ -7,9 +7,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-
-/* ===== PAGE PANIER ===== */
-
 .cart-container {
   max-width: 1200px;
   margin: 100px auto 60px;
@@ -17,8 +14,6 @@
   display: flex;
   gap: 30px;
 }
-
-/* Liste produits */
 .cart-items {
   flex: 2;
   background: #111;
@@ -29,8 +24,6 @@
   flex-direction: column;
   gap: 20px;
 }
-
-/* Item individuel */
 .cart-item {
   display: flex;
   align-items: center;
@@ -40,28 +33,14 @@
   padding: 20px;
   border: 1px solid #222;
 }
-
 .cart-item-left {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-.cart-item h3 {
-  margin: 0;
-}
-
-.cart-price {
-  color: #bbb;
-}
-
-/* Bouton supprimer */
+.cart-item img { width: 80px; height: 80px; object-fit: contain; }
+.cart-item h3 { margin: 0; }
+.cart-price { color: #bbb; }
 .remove-btn {
   background: transparent;
   border: 1px solid #555;
@@ -71,13 +50,10 @@
   cursor: pointer;
   transition: 0.2s;
 }
-
 .remove-btn:hover {
   background: #222;
   color: white;
 }
-
-/* Bloc résumé */
 .cart-summary {
   flex: 1;
   background: #000;
@@ -86,18 +62,13 @@
   padding: 40px;
   height: fit-content;
 }
-
-.cart-summary h2 {
-  margin-bottom: 20px;
-}
-
+.cart-summary h2 { margin-bottom: 20px; }
 .total-line {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
   font-size: 18px;
 }
-
 .checkout-btn {
   width: 100%;
   padding: 15px;
@@ -109,18 +80,8 @@
   cursor: pointer;
   transition: 0.2s;
 }
-
-.checkout-btn:hover {
-  transform: scale(1.03);
-}
-
-/* Responsive */
-@media (max-width: 850px) {
-  .cart-container {
-    flex-direction: column;
-  }
-}
-
+.checkout-btn:hover { transform: scale(1.03); }
+@media (max-width: 850px) { .cart-container { flex-direction: column; } }
 </style>
 </head>
 
@@ -141,43 +102,22 @@
       </ul>
     </nav>
   </div>
-
-  <div class="logo">
-    <img src="ScaleGarage.png" alt="Logo">
-  </div>
+  <div class="logo"><img src="ScaleGarage.png" alt="Logo"></div>
 </header>
 
 <main class="cart-container">
 
-  <!-- LISTE PRODUITS -->
-  <div class="cart-items">
-
-    <div class="cart-item">
-      <div class="cart-item-left">
-        <img src="Remove BG.png" alt="Audi RS6">
-        <div>
-          <h3>AUDI RS6</h3>
-          <div class="cart-price">29.99€</div>
-        </div>
-      </div>
-
-      <button class="remove-btn">Supprimer</button>
-    </div>
-
+  <div class="cart-items" id="cart-items">
+    <!-- Les produits seront injectés ici -->
   </div>
 
-  <!-- RÉSUMÉ -->
   <div class="cart-summary">
     <h2>Résumé</h2>
-
     <div class="total-line">
       <span>Total</span>
-      <span>29.99€</span>
+      <span id="cart-total">0€</span>
     </div>
-
-    <button class="checkout-btn">
-      Passer au paiement
-    </button>
+    <button class="checkout-btn">Passer au paiement</button>
   </div>
 
 </main>
@@ -185,13 +125,49 @@
 <script>
 const menuBtn = document.getElementById('menu-btn');
 const dropdown = document.getElementById('dropdown-menu');
-
-menuBtn.addEventListener('click', (e) => {
+menuBtn.addEventListener('click', e => {
   e.stopPropagation();
   dropdown.classList.toggle('active');
   menuBtn.classList.toggle('open');
 });
+
+// Récupérer le panier
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+const cartItemsContainer = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+
+function renderCart() {
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div class="cart-item-left">
+        <img src="${item.img}" alt="${item.name}">
+        <div>
+          <h3>${item.name}</h3>
+          <div class="cart-price">${item.price}€</div>
+        </div>
+      </div>
+      <button class="remove-btn" onclick="removeItem(${index})">Supprimer</button>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+  cartTotal.textContent = total.toFixed(2) + '€';
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+renderCart();
 </script>
 
 </body>
 </html>
+
