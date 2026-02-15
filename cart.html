@@ -7,81 +7,113 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+body {
+  background: linear-gradient(135deg, #1a1a1a, #000);
+  color: white;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.header {
+  position: fixed;
+  top:0;
+  left:50%;
+  transform: translateX(-50%);
+  width:95%;
+  height:70px;
+  border-radius:35px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  z-index:1000;
+}
+
+.logo img { width:55px; height:55px; border-radius:50%; }
+
+.menu-container { position:relative; }
+
+.menu-icon { display:flex; flex-direction:column; justify-content:space-between; width:28px; height:20px; cursor:pointer; }
+.menu-icon span { display:block; height:4px; background:white; border-radius:2px; transition:0.3s; }
+.menu-icon.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.menu-icon.open span:nth-child(2) { opacity:0; }
+.menu-icon.open span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+.dropdown { position:absolute; top:60px; left:0; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius:15px; padding:10px 0; width:180px; opacity:0; pointer-events:none; transition:all 0.3s; }
+.dropdown.active { opacity:1; pointer-events:auto; }
+.dropdown ul { list-style:none; padding:0; margin:0; }
+.dropdown li { text-align:center; margin:8px 0; }
+.dropdown a { text-decoration:none; color:white; padding:8px 12px; display:block; border-radius:10px; transition:background 0.3s; }
+.dropdown a:hover { background: rgba(255,255,255,0.15); }
+
+/* Panier */
 .cart-container {
   max-width: 1200px;
-  margin: 100px auto 60px;
-  padding: 40px;
-  display: flex;
-  gap: 30px;
+  margin: 120px auto 60px;
+  padding: 20px;
 }
-.cart-items {
-  flex: 2;
-  background: #111;
-  border-radius: 30px;
-  border: 1px solid #333;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+
 .cart-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: #000;
-  border-radius: 20px;
-  padding: 20px;
-  border: 1px solid #222;
-}
-.cart-item-left {
-  display: flex;
   align-items: center;
-  gap: 20px;
+  background:#111;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:15px;
 }
-.cart-item img { width: 80px; height: 80px; object-fit: contain; }
-.cart-item h3 { margin: 0; }
-.cart-price { color: #bbb; }
-.remove-btn {
-  background: transparent;
-  border: 1px solid #555;
-  color: #aaa;
-  padding: 8px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s;
+
+.cart-item img { width:120px; height:auto; border-radius:15px; }
+
+.cart-item-details {
+  flex:1;
+  margin-left:20px;
 }
-.remove-btn:hover {
-  background: #222;
-  color: white;
+
+.cart-item-details h3 { margin:0 0 10px 0; }
+.cart-item-details p { margin:0; color:#ccc; }
+
+.cart-item button {
+  background:#ff4d4d;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
 }
-.cart-summary {
-  flex: 1;
-  background: #000;
-  border-radius: 30px;
-  border: 1px solid #333;
-  padding: 40px;
-  height: fit-content;
+
+.cart-total {
+  text-align:right;
+  font-size:22px;
+  margin-top:20px;
 }
-.cart-summary h2 { margin-bottom: 20px; }
-.total-line {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  font-size: 18px;
+
+.payment-buttons {
+  display:flex;
+  gap:20px;
+  margin-top:20px;
 }
-.checkout-btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 15px;
-  border: none;
-  background: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
+
+.payment-buttons button,
+.payment-buttons form button {
+  padding:15px 25px;
+  border-radius:15px;
+  font-size:16px;
+  cursor:pointer;
+  border:none;
+  font-weight:bold;
+  transition:0.2s;
 }
-.checkout-btn:hover { transform: scale(1.03); }
-@media (max-width: 850px) { .cart-container { flex-direction: column; } }
+
+.payment-buttons button:hover,
+.payment-buttons form button:hover { transform:scale(1.05); }
+
+.stripe-btn { background:#6772e5; color:white; }
+.paypal-btn { background:#ffc439; color:#111; }
 </style>
 </head>
 
@@ -98,7 +130,7 @@
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="cart.html">Cart</a></li>
+        <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
       </ul>
     </nav>
   </div>
@@ -106,20 +138,18 @@
 </header>
 
 <main class="cart-container">
+  <div id="cart-items"></div>
+  <div class="cart-total" id="cart-total">Total : 0€</div>
 
-  <div class="cart-items" id="cart-items">
-    <!-- Les produits seront injectés ici -->
+  <div class="payment-buttons">
+    <!-- Stripe -->
+    <form action="https://your-server.com/create-checkout-session" method="POST">
+      <button type="submit" class="stripe-btn">Payer avec Stripe</button>
+    </form>
+
+    <!-- PayPal -->
+    <button class="paypal-btn" id="paypal-pay">Payer avec PayPal</button>
   </div>
-
-  <div class="cart-summary">
-    <h2>Résumé</h2>
-    <div class="total-line">
-      <span>Total</span>
-      <span id="cart-total">0€</span>
-    </div>
-    <button class="checkout-btn">Passer au paiement</button>
-  </div>
-
 </main>
 
 <script>
@@ -131,13 +161,13 @@ menuBtn.addEventListener('click', e => {
   menuBtn.classList.toggle('open');
 });
 
-// Récupérer le panier
+// Gestion du panier
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
 const cartItemsContainer = document.getElementById('cart-items');
-const cartTotal = document.getElementById('cart-total');
+const cartTotalEl = document.getElementById('cart-total');
+const cartCount = document.getElementById('cart-count');
 
-function renderCart() {
+function updateCartUI() {
   cartItemsContainer.innerHTML = '';
   let total = 0;
   cart.forEach((item, index) => {
@@ -145,29 +175,33 @@ function renderCart() {
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
-      <div class="cart-item-left">
-        <img src="${item.img}" alt="${item.name}">
-        <div>
-          <h3>${item.name}</h3>
-          <div class="cart-price">${item.price}€</div>
-        </div>
+      <img src="${item.img}" alt="${item.name}">
+      <div class="cart-item-details">
+        <h3>${item.name}</h3>
+        <p>${item.price.toFixed(2)}€</p>
       </div>
-      <button class="remove-btn" onclick="removeItem(${index})">Supprimer</button>
+      <button onclick="removeItem(${index})">Supprimer</button>
     `;
     cartItemsContainer.appendChild(div);
   });
-  cartTotal.textContent = total.toFixed(2) + '€';
+  cartTotalEl.textContent = 'Total : ' + total.toFixed(2) + '€';
+  cartCount.textContent = cart.length;
 }
-
 function removeItem(index) {
-  cart.splice(index, 1);
+  cart.splice(index,1);
   localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
+  updateCartUI();
 }
 
-renderCart();
+// PayPal redirection
+document.getElementById('paypal-pay').addEventListener('click', () => {
+  if(cart.length === 0){ alert('Le panier est vide !'); return; }
+  let total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+  window.location.href = `https://www.paypal.com/paypalme/toncompte/${total}`;
+});
+
+updateCartUI();
 </script>
 
 </body>
 </html>
-
