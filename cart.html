@@ -40,7 +40,6 @@ body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin:
 .payment-buttons { display:flex; flex-direction:column; gap:15px; }
 .payment-buttons button, .payment-buttons form button { padding:15px 25px; border-radius:15px; font-size:16px; cursor:pointer; border:none; font-weight:bold; transition:0.2s; }
 .payment-buttons button:hover, .payment-buttons form button:hover { transform:scale(1.05); }
-.stripe-btn { background:#6772e5; color:white; }
 .paypal-btn { background:#009cde; color:white; }
 @media(max-width:900px){
   .cart-container { flex-direction:column; }
@@ -78,19 +77,13 @@ body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin:
     <div class="cart-total" id="cart-total">Total : 0€</div>
 
     <div class="payment-buttons">
-      <!-- Stripe -->
-      <form id="stripe-form" style="width:100%;">
-        <button type="submit" class="stripe-btn" style="width:100%;">Payer avec Stripe</button>
-      </form>
-
-      <!-- PayPal -->
-      <div id="paypal-button-container" style="width:60%; max-width:200px;"></div>
+      <div id="paypal-button-container" style="width:100%; max-width:250px;"></div>
     </div>
 
   </div>
 </main>
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=TA_CLIENT_ID_PAYPAL&currency=EUR"></script>
 
 <script>
@@ -124,23 +117,10 @@ function updateCartUI() {
   cartTotalEl.textContent='Total : '+total.toFixed(2)+'€';
   cartCount.textContent=cart.length;
 }
-function removeItem(index){ cart.splice(index,1); localStorage.setItem('cart',JSON.stringify(cart)); updateCartUI(); }
-updateCartUI();
 
-/* ==== Stripe ==== */
-const stripePublicKey = 'TA_CLE_PUBLIQUE_STRIPE'; // Remplace par ta clé publique
-const stripe = Stripe(stripePublicKey);
-document.getElementById('stripe-form').addEventListener('submit', async e=>{
-  e.preventDefault();
-  if(cart.length===0){ alert('Le panier est vide !'); return; }
-  const res = await fetch('/create-checkout-session',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ cart })
-  });
-  const data = await res.json();
-  stripe.redirectToCheckout({ sessionId: data.id });
-});
+function removeItem(index){ cart.splice(index,1); localStorage.setItem('cart',JSON.stringify(cart)); updateCartUI(); }
+
+updateCartUI();
 
 /* ==== PayPal ==== */
 paypal.Buttons({
