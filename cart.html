@@ -7,41 +7,16 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-body {
-  background: linear-gradient(135deg, #1a1a1a, #000);
-  color: white;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-}
-
-.header {
-  position: fixed;
-  top:0;
-  left:50%;
-  transform: translateX(-50%);
-  width:95%;
-  height:70px;
-  border-radius:35px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(20px) saturate(180%);
-  z-index:1000;
-}
-
+/* ==== Ton CSS actuel ==== */
+body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin: 0; font-family: Arial, sans-serif; min-height: 100vh; }
+.header { position: fixed; top:0; left:50%; transform: translateX(-50%); width:95%; height:70px; border-radius:35px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px) saturate(180%); z-index:1000; }
 .logo img { width:55px; height:55px; border-radius:50%; }
-
 .menu-container { position:relative; }
-
 .menu-icon { display:flex; flex-direction:column; justify-content:space-between; width:28px; height:20px; cursor:pointer; }
 .menu-icon span { display:block; height:4px; background:white; border-radius:2px; transition:0.3s; }
 .menu-icon.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .menu-icon.open span:nth-child(2) { opacity:0; }
 .menu-icon.open span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
-
 .dropdown { position:absolute; top:60px; left:0; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius:15px; padding:10px 0; width:180px; opacity:0; pointer-events:none; transition:all 0.3s; }
 .dropdown.active { opacity:1; pointer-events:auto; }
 .dropdown ul { list-style:none; padding:0; margin:0; }
@@ -50,113 +25,23 @@ body {
 .dropdown a:hover { background: rgba(255,255,255,0.15); }
 
 /* ==== Cart style ==== */
-.cart-container {
-  max-width: 1200px;
-  margin: 120px auto 60px;
-  display: flex;
-  gap: 20px;
-  padding: 0 20px;
-}
-
-.cart-left {
-  flex:2;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.cart-item {
-  display:flex;
-  background: rgba(255,255,255,0.05);
-  border:1px solid #333;
-  border-radius:30px;
-  overflow:hidden;
-  transition: transform 0.3s;
-}
-
+.cart-container { max-width: 1200px; margin: 120px auto 60px; display: flex; gap: 20px; padding: 0 20px; }
+.cart-left { flex:2; display:flex; flex-direction:column; gap:15px; }
+.cart-item { display:flex; background: rgba(255,255,255,0.05); border:1px solid #333; border-radius:30px; overflow:hidden; transition: transform 0.3s; }
 .cart-item:hover { transform: translateY(-3px); }
-
-.cart-item img {
-  width:150px;
-  height:auto;
-  object-fit: contain;
-  padding:20px;
-  background: #111;
-}
-
-.cart-item-details {
-  flex:1;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.cart-item-details h3 {
-  margin:0;
-  font-size:20px;
-  text-transform:uppercase;
-}
-
-.cart-item-details p {
-  margin:5px 0 0 0;
-  font-weight:bold;
-  color:#bbb;
-}
-
-.cart-item button {
-  align-self:flex-start;
-  background:#555;
-  color:white;
-  border:none;
-  padding:12px 20px;
-  border-radius:15px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.2s;
-}
-
+.cart-item img { width:150px; height:auto; object-fit: contain; padding:20px; background: #111; }
+.cart-item-details { flex:1; padding:20px; display:flex; flex-direction:column; justify-content:space-between; }
+.cart-item-details h3 { margin:0; font-size:20px; text-transform:uppercase; }
+.cart-item-details p { margin:5px 0 0 0; font-weight:bold; color:#bbb; }
+.cart-item button { align-self:flex-start; background:#555; color:white; border:none; padding:12px 20px; border-radius:15px; cursor:pointer; font-weight:bold; transition:0.2s; }
 .cart-item button:hover { background:#777; transform:scale(1.05); }
-
-.cart-right {
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.cart-total {
-  background: rgba(255,255,255,0.08);
-  border-radius:30px;
-  padding:20px;
-  text-align:center;
-  font-size:22px;
-  border:1px solid #333;
-}
-
-.payment-buttons {
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.payment-buttons button,
-.payment-buttons form button {
-  padding:15px 25px;
-  border-radius:15px;
-  font-size:16px;
-  cursor:pointer;
-  border:none;
-  font-weight:bold;
-  transition:0.2s;
-}
-
-.payment-buttons button:hover,
-.payment-buttons form button:hover { transform:scale(1.05); }
-
+.cart-right { flex:1; display:flex; flex-direction:column; gap:20px; }
+.cart-total { background: rgba(255,255,255,0.08); border-radius:30px; padding:20px; text-align:center; font-size:22px; border:1px solid #333; }
+.payment-buttons { display:flex; flex-direction:column; gap:15px; }
+.payment-buttons button, .payment-buttons form button { padding:15px 25px; border-radius:15px; font-size:16px; cursor:pointer; border:none; font-weight:bold; transition:0.2s; }
+.payment-buttons button:hover, .payment-buttons form button:hover { transform:scale(1.05); }
 .stripe-btn { background:#6772e5; color:white; }
 .paypal-btn { background:#009cde; color:white; }
-
 @media(max-width:900px){
   .cart-container { flex-direction:column; }
   .cart-right { width:100%; }
@@ -165,17 +50,13 @@ body {
   .payment-buttons { flex-direction:row; justify-content:center; }
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <header class="header">
   <div class="menu-container">
-    <div class="menu-icon" id="menu-btn">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <div class="menu-icon" id="menu-btn"><span></span><span></span><span></span></div>
     <nav class="dropdown" id="dropdown-menu">
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -196,30 +77,29 @@ body {
   <div class="cart-right">
     <div class="cart-total" id="cart-total">Total : 0€</div>
 
-<div class="payment-buttons" style="display:flex; flex-direction:column; gap:15px; align-items:center;">
-  <!-- Stripe pleine largeur -->
-  <form action="https://your-server.com/create-checkout-session" method="POST" style="width:100%;">
-    <button type="submit" class="stripe-btn" style="width:100%;">Payer avec Stripe</button>
-  </form>
+    <div class="payment-buttons">
+      <!-- Stripe -->
+      <form id="stripe-form" style="width:100%;">
+        <button type="submit" class="stripe-btn" style="width:100%;">Payer avec Stripe</button>
+      </form>
 
-  <!-- PayPal plus petit et centré -->
-  <button class="paypal-btn" id="paypal-pay" style="width:60%; max-width:200px;">Payer avec PayPal</button>
-</div>
+      <!-- PayPal -->
+      <div id="paypal-button-container" style="width:60%; max-width:200px;"></div>
+    </div>
 
   </div>
-
 </main>
 
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=TA_CLIENT_ID_PAYPAL&currency=EUR"></script>
+
 <script>
+/* ==== Menu ==== */
 const menuBtn = document.getElementById('menu-btn');
 const dropdown = document.getElementById('dropdown-menu');
-menuBtn.addEventListener('click', e => {
-  e.stopPropagation();
-  dropdown.classList.toggle('active');
-  menuBtn.classList.toggle('open');
-});
+menuBtn.addEventListener('click', e => { e.stopPropagation(); dropdown.classList.toggle('active'); menuBtn.classList.toggle('open'); });
 
-// Gestion panier
+/* ==== Panier ==== */
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItemsContainer = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
@@ -228,38 +108,54 @@ const cartCount = document.getElementById('cart-count');
 function updateCartUI() {
   cartItemsContainer.innerHTML = '';
   let total = 0;
-  cart.forEach((item, index) => {
+  cart.forEach((item,index)=>{
     total += item.price;
     const div = document.createElement('div');
-    div.className = 'cart-item';
+    div.className='cart-item';
     div.innerHTML = `
       <img src="${item.img}" alt="${item.name}">
       <div class="cart-item-details">
         <h3>${item.name}</h3>
         <p>${item.price.toFixed(2)}€</p>
         <button onclick="removeItem(${index})">Supprimer</button>
-      </div>
-    `;
+      </div>`;
     cartItemsContainer.appendChild(div);
   });
-  cartTotalEl.textContent = 'Total : ' + total.toFixed(2) + '€';
-  cartCount.textContent = cart.length;
+  cartTotalEl.textContent='Total : '+total.toFixed(2)+'€';
+  cartCount.textContent=cart.length;
 }
+function removeItem(index){ cart.splice(index,1); localStorage.setItem('cart',JSON.stringify(cart)); updateCartUI(); }
+updateCartUI();
 
-function removeItem(index) {
-  cart.splice(index,1);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartUI();
-}
-
-// PayPal redirection
-document.getElementById('paypal-pay').addEventListener('click', () => {
-  if(cart.length === 0){ alert('Le panier est vide !'); return; }
-  let total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  window.location.href = `https://www.paypal.com/paypalme/toncompte/${total}`;
+/* ==== Stripe ==== */
+const stripePublicKey = 'TA_CLE_PUBLIQUE_STRIPE'; // Remplace par ta clé publique
+const stripe = Stripe(stripePublicKey);
+document.getElementById('stripe-form').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(cart.length===0){ alert('Le panier est vide !'); return; }
+  const res = await fetch('/create-checkout-session',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ cart })
+  });
+  const data = await res.json();
+  stripe.redirectToCheckout({ sessionId: data.id });
 });
 
-updateCartUI();
+/* ==== PayPal ==== */
+paypal.Buttons({
+  createOrder: (data, actions)=>{
+    if(cart.length===0){ alert('Le panier est vide !'); return; }
+    const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+    return actions.order.create({ purchase_units:[{ amount:{ value: total } }] });
+  },
+  onApprove: (data, actions)=> actions.order.capture().then(details=>{
+    alert('Paiement effectué par '+details.payer.name.given_name);
+    localStorage.removeItem('cart');
+    cart=[];
+    updateCartUI();
+  })
+}).render('#paypal-button-container');
 </script>
 
 </body>
