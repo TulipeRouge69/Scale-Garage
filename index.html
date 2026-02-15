@@ -1,161 +1,108 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scale Garage - Accueil</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Scale Garage - Accueil</title>
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    /* --- Couleurs de base et Fond --- */
-    body {
-      background: linear-gradient(135deg, #1a1a1a, #000000);
-      color: white;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
+<style>
+/* ====== GRID ACCUEIL ====== */
 
-    /* --- GRILLE EN MOSAÏQUE (Bento Grid) --- */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
-      grid-template-rows: auto auto;    /* Deux lignes égales */
-      gap: 20px;
-      padding: 40px;
-      max-width: 1200px;
-      margin: 100px auto 0; /* Espace pour le header */
-    }
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 100px auto 0;
+}
 
-    /* Style des blocs identique à la page produit */
-    .card {
-      background-color: #111;
-      border-radius: 30px;
-      border: 1px solid #333;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
+.home-card {
+  background-color: #111;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #555;
-    }
+.home-card:hover {
+  transform: translateY(-5px);
+  border-color: #555;
+}
 
-    /* Disposition spécifique --- */
-    .card.left-small {
-      grid-column: 1;
-    }
+.home-tall {
+  grid-row: span 2;
+  background: #000;
+}
 
-    .card.right-tall {
-      grid-column: 2;
-      grid-row: 1 / 3; /* Prend la hauteur des deux blocs de gauche */
-      background-color: #000;
-    }
+.home-card img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
 
-    /* Contenu des cartes */
-    .car-image img {
-      max-width: 100%;
-      height: auto;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-    }
-
-    .text-zone p {
-      font-size: 18px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    /* Responsive mobile */
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
-      .card.right-tall {
-        grid-column: 1;
-        grid-row: auto;
-        min-height: 300px;
-      }
-    }
-  </style>
+.home-card p {
+  margin-top: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+</style>
 </head>
+
 <body>
 
-  <header class="header">
-    <div class="menu-container">
-      <div class="menu-icon" id="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="dropdown" id="dropdown-menu">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Cart</a></li>
-        </ul>
-      </nav>
+<header class="header">
+  <div class="menu-container">
+    <div class="menu-icon" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+    <nav class="dropdown" id="dropdown-menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Cart</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <div class="logo">
-      <img src="ScaleGarage.png" alt="Logo Scale Garage">
-    </div>
-  </header>
+  <div class="logo">
+    <img src="ScaleGarage.png">
+  </div>
+</header>
 
-  <main class="grid">
-    
-    <div class="card left-small">
-      <div class="text-zone">
-        <div class="car-image">
-          <a href="presentation-voiture.html">
-            <img src="Remove BG.png" alt="Audi RS6">
-          </a>
-        </div>
-        <p>Audi RS6</p>
-      </div>
-    </div>
+<main class="home-grid">
 
-    <div class="card left-small">
-       <div class="text-zone">
-          <p>Accessoires</p>
-       </div>
-    </div>
+  <div class="home-card">
+    <a href="presentation-voiture.html">
+      <img src="Remove BG.png">
+      <p>Audi RS6</p>
+    </a>
+  </div>
 
-    <div class="card right-tall">
-       <div class="text-zone">
-          <p>Nouvelle Collection</p>
-          <span style="color: #666;">Édition Limitée</span>
-       </div>
-    </div>
+  <div class="home-card">
+    <p>Accessoires</p>
+  </div>
 
-  </main>
+  <div class="home-card home-tall">
+    <p>Nouvelle Collection</p>
+    <span style="color:#666;">Édition Limitée</span>
+  </div>
 
-  <script>
-    /* Script du menu burger exactement comme ton modèle */
-    const menuBtn = document.getElementById('menu-btn');
-    const dropdown = document.getElementById('dropdown-menu');
+</main>
 
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle('active');
-      menuBtn.classList.toggle('open');
-    });
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const dropdown = document.getElementById('dropdown-menu');
 
-    // Fermer le menu si on clique ailleurs
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
-        dropdown.classList.remove('active');
-        menuBtn.classList.remove('open');
-      }
-    });
-  </script>
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dropdown.classList.toggle('active');
+  menuBtn.classList.toggle('open');
+});
+</script>
 
 </body>
 </html>
