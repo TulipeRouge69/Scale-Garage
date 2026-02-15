@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ==== Ton CSS actuel ==== */
+/* ==== CSS principal ==== */
 body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin: 0; font-family: Arial, sans-serif; min-height: 100vh; }
 .header { position: fixed; top:0; left:50%; transform: translateX(-50%); width:95%; height:70px; border-radius:35px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px) saturate(180%); z-index:1000; }
 .logo img { width:55px; height:55px; border-radius:50%; }
@@ -37,20 +37,21 @@ body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin:
 .cart-item button:hover { background:#777; transform:scale(1.05); }
 .cart-right { flex:1; display:flex; flex-direction:column; gap:20px; }
 .cart-total { background: rgba(255,255,255,0.08); border-radius:30px; padding:20px; text-align:center; font-size:22px; border:1px solid #333; }
-.payment-buttons { display:flex; flex-direction:column; gap:15px; }
-.payment-buttons button, .payment-buttons form button { padding:15px 25px; border-radius:15px; font-size:16px; cursor:pointer; border:none; font-weight:bold; transition:0.2s; }
-.payment-buttons button:hover, .payment-buttons form button:hover { transform:scale(1.05); }
-.paypal-btn { background:#009cde; color:white; }
+
+/* ==== PayPal ==== */
+.payment-buttons { display:block; text-align:center; margin-top:20px; }
+#paypal-button-container { display:inline-block; width:250px; }
+
+/* ==== Responsive ==== */
 @media(max-width:900px){
   .cart-container { flex-direction:column; }
   .cart-right { width:100%; }
   .cart-item { flex-direction:column; align-items:center; }
   .cart-item img { width:100%; height:auto; }
-  .payment-buttons { flex-direction:row; justify-content:center; }
 }
 </style>
-
 </head>
+
 <body>
 
 <header class="header">
@@ -68,7 +69,6 @@ body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin:
 </header>
 
 <main class="cart-container">
-
   <div class="cart-left" id="cart-items">
     <!-- Produits ajoutés via JS -->
   </div>
@@ -77,9 +77,8 @@ body { background: linear-gradient(135deg, #1a1a1a, #000); color: white; margin:
     <div class="cart-total" id="cart-total">Total : 0€</div>
 
     <div class="payment-buttons">
-      <div id="paypal-button-container" style="width:100%; max-width:250px;"></div>
+      <div id="paypal-button-container"></div>
     </div>
-
   </div>
 </main>
 
@@ -124,6 +123,7 @@ updateCartUI();
 
 /* ==== PayPal ==== */
 paypal.Buttons({
+  style: { layout: 'vertical', color:'blue', shape:'rect', label:'paypal' },
   createOrder: (data, actions)=>{
     if(cart.length===0){ alert('Le panier est vide !'); return; }
     const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
