@@ -196,14 +196,14 @@ body {
   <div class="cart-right">
     <div class="cart-total" id="cart-total">Total : 0€</div>
 
-<div class="payment-buttons">
-  <!-- Stripe plus grand -->
-  <form action="https://your-server.com/create-checkout-session" method="POST">
-    <button type="submit" class="stripe-btn">Payer avec Stripe</button>
+<div class="payment-buttons" style="display:flex; flex-direction:column; gap:15px; align-items:center;">
+  <!-- Stripe pleine largeur -->
+  <form action="https://your-server.com/create-checkout-session" method="POST" style="width:100%;">
+    <button type="submit" class="stripe-btn" style="width:100%;">Payer avec Stripe</button>
   </form>
 
-  <!-- PayPal plus petit -->
-  <button class="paypal-btn" id="paypal-pay" style="padding:10px 20px; font-size:14px;">Payer avec PayPal</button>
+  <!-- PayPal plus petit et centré -->
+  <button class="paypal-btn" id="paypal-pay" style="width:60%; max-width:200px;">Payer avec PayPal</button>
 </div>
 
   </div>
