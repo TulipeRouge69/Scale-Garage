@@ -11,7 +11,7 @@
 .home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 300px 300px;
+  grid-template-rows: 300px 300px; /* deux blocs gauche identiques */
   gap: 20px;
   padding: 40px;
   max-width: 1200px;
@@ -36,6 +36,7 @@
   border-color: #555;
 }
 
+/* Bloc droite prend les deux lignes */
 .home-tall {
   grid-column: 2;
   grid-row: 1 / 3;
@@ -55,6 +56,7 @@
   text-transform: uppercase;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .home-grid {
     grid-template-columns: 1fr;
@@ -67,6 +69,7 @@
 }
 </style>
 </head>
+
 <body>
 
 <header class="header">
@@ -84,6 +87,7 @@
       </ul>
     </nav>
   </div>
+
   <div class="logo">
     <img src="ScaleGarage.png" alt="Logo">
   </div>
@@ -93,9 +97,10 @@
 
   <!-- Bloc haut gauche -->
   <div class="home-card">
-    <img src="Remove BG.png" alt="Audi RS6">
-    <p>Audi RS6</p>
-    <button onclick="addToCart('Audi RS6',29.99,'Remove BG.png')">Add to Cart</button>
+    <a href="presentation-voiture.html" style="text-decoration:none; color:white;">
+      <img src="Remove BG.png" alt="Audi RS6">
+      <p>Audi RS6</p>
+    </a>
   </div>
 
   <!-- Bloc bas gauche -->
@@ -103,7 +108,7 @@
     <p>Accessoires</p>
   </div>
 
-  <!-- Bloc droite -->
+  <!-- Bloc droite (hauteur double) -->
   <div class="home-card home-tall">
     <p>Nouvelle Collection</p>
     <span style="color:#666;">Édition Limitée</span>
@@ -116,27 +121,17 @@ const menuBtn = document.getElementById('menu-btn');
 const dropdown = document.getElementById('dropdown-menu');
 const cartCount = document.getElementById('cart-count');
 
-menuBtn.addEventListener('click', e => {
+menuBtn.addEventListener('click', (e) => {
   e.stopPropagation();
   dropdown.classList.toggle('active');
   menuBtn.classList.toggle('open');
 });
 
-// Panier
+// Mettre à jour le compteur du panier dans le header
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
 function updateCartCount() {
   cartCount.textContent = cart.length;
 }
-
-// Ajouter au panier
-function addToCart(name, price, img) {
-  cart.push({name, price, img});
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartCount();
-  alert(name + " ajouté au panier !");
-}
-
 updateCartCount();
 </script>
 
