@@ -49,14 +49,20 @@ body {
 .dropdown a { text-decoration:none; color:white; padding:8px 12px; display:block; border-radius:10px; transition:background 0.3s; }
 .dropdown a:hover { background: rgba(255,255,255,0.15); }
 
-/* ==== Cart style ========== */
+/* ==== Cart style ==== */
 .cart-container {
   max-width: 1200px;
   margin: 120px auto 60px;
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.cart-left {
+  flex:2;
   display:flex;
   flex-direction:column;
-  gap:20px;
-  padding: 0 20px;
+  gap:15px;
 }
 
 .cart-item {
@@ -100,7 +106,7 @@ body {
 
 .cart-item button {
   align-self:flex-start;
-  background:#ff4d4d;
+  background:#555;
   color:white;
   border:none;
   padding:12px 20px;
@@ -110,22 +116,28 @@ body {
   transition:0.2s;
 }
 
-.cart-item button:hover { transform:scale(1.05); }
+.cart-item button:hover { background:#777; transform:scale(1.05); }
+
+.cart-right {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
 
 .cart-total {
   background: rgba(255,255,255,0.08);
   border-radius:30px;
   padding:20px;
-  text-align:right;
+  text-align:center;
   font-size:22px;
   border:1px solid #333;
 }
 
 .payment-buttons {
   display:flex;
-  gap:20px;
-  justify-content:flex-end;
-  margin-top:20px;
+  flex-direction:column;
+  gap:15px;
 }
 
 .payment-buttons button,
@@ -143,13 +155,14 @@ body {
 .payment-buttons form button:hover { transform:scale(1.05); }
 
 .stripe-btn { background:#6772e5; color:white; }
-.paypal-btn { background:#ffc439; color:#111; width:150px; }
+.paypal-btn { background:#009cde; color:white; }
 
 @media(max-width:900px){
-  .cart-item { flex-direction:column; }
+  .cart-container { flex-direction:column; }
+  .cart-right { width:100%; }
+  .cart-item { flex-direction:column; align-items:center; }
   .cart-item img { width:100%; height:auto; }
-  .payment-buttons { flex-direction:column; align-items:flex-end; }
-  .paypal-btn { width:100%; }
+  .payment-buttons { flex-direction:row; justify-content:center; }
 }
 </style>
 </head>
@@ -175,15 +188,25 @@ body {
 </header>
 
 <main class="cart-container">
-  <div id="cart-items"></div>
-  <div class="cart-total" id="cart-total">Total : 0€</div>
 
-  <div class="payment-buttons">
-    <form action="https://your-server.com/create-checkout-session" method="POST">
-      <button type="submit" class="stripe-btn">Payer avec Stripe</button>
-    </form>
-    <button class="paypal-btn" id="paypal-pay">Payer avec PayPal</button>
+  <div class="cart-left" id="cart-items">
+    <!-- Produits ajoutés via JS -->
   </div>
+
+  <div class="cart-right">
+    <div class="cart-total" id="cart-total">Total : 0€</div>
+
+    <div class="payment-buttons">
+      <!-- Stripe -->
+      <form action="https://your-server.com/create-checkout-session" method="POST">
+        <button type="submit" class="stripe-btn">Payer avec Stripe</button>
+      </form>
+
+      <!-- PayPal -->
+      <button class="paypal-btn" id="paypal-pay">Payer avec PayPal</button>
+    </div>
+  </div>
+
 </main>
 
 <script>
