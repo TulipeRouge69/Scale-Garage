@@ -1,192 +1,159 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Audi RS6 - Scale Garage</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Audi RS6 - Scale Garage</title>
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    /* --- Couleurs de base de ta page principale --- */
-    body {
-      background: linear-gradient(135deg, #1a1a1a, #000000); /* Fond noir/gris foncé */
-      color: white;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
+<style>
+/* ===== PAGE PRODUIT ===== */
 
-    /* --- Conteneur Principal --- */
-    .product-layout {
-      display: flex;
-      gap: 20px;
-      padding: 40px;
-      max-width: 1200px;
-      margin: 80px auto 20px;
-    }
+.product-layout {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 100px auto 20px;
+}
 
-    /* --- Bloc Gauche : Image --- */
-    .product-visual {
-      flex: 2;
-      background-color: #111; /* Gris très foncé */
-      border-radius: 30px; /* Bords bien arrondis comme tes cartes */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      border: 1px solid #333; /* Légère bordure pour le relief */
-    }
+.product-image {
+  flex: 2;
+  background: #111;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .product-visual img {
-      max-width: 100%;
-      height: auto;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-    }
+.product-image img {
+  max-width: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
 
-    /* --- Bloc Droite : Zone d'achat --- */
-    .product-buy-column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+.product-buy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    .info-box {
-      background-color: #000; /* Fond noir pur */
-      color: white;
-      padding: 40px;
-      border-radius: 30px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #333;
-    }
+.product-box {
+  background: #000;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 40px;
+  text-align: center;
+}
 
-    .info-box h1 {
-      margin: 0 0 10px 0;
-      font-size: 28px;
-      letter-spacing: 1px;
-    }
+.price {
+  font-size: 22px;
+  color: #bbb;
+  margin: 20px 0;
+}
 
-    .price-tag {
-      font-size: 22px;
-      color: #bbb;
-      margin-bottom: 25px;
-    }
+.add-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+}
 
-    .add-to-cart-btn {
-      background-color: #fff;
-      color: #000;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      font-size: 18px;
-      transition: transform 0.2s;
-    }
+.add-btn:hover {
+  transform: scale(1.03);
+}
 
-    .add-to-cart-btn:hover {
-      transform: scale(1.03);
-      background-color: #f0f0f0;
-    }
+.product-description {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 40px;
+}
 
-    /* --- Bloc Description (En bas) --- */
-    .product-description-footer {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      padding: 0 40px;
-    }
-
-    .desc-content {
-      background-color: #111;
-      color: #ccc;
-      padding: 40px;
-      border-radius: 30px;
-      border: 1px solid #333;
-    }
-
-    .desc-content h3 {
-      color: white;
-      margin-top: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 850px) {
-      .product-layout {
-        flex-direction: column;
-        padding: 20px;
-      }
-    }
-  </style>
+.product-description-box {
+  background: #111;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 40px;
+  color: #ccc;
+}
+</style>
 </head>
+
 <body>
 
-  <header class="header">
-    <div class="menu-container">
-      <div class="menu-icon" id="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="dropdown" id="dropdown-menu">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Cart</a></li>
-        </ul>
-      </nav>
+<header class="header">
+  <div class="menu-container">
+    <div class="menu-icon" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="dropdown" id="dropdown-menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Cart</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="logo">
+    <img src="ScaleGarage.png">
+  </div>
+</header>
+
+<main>
+
+<div class="product-layout">
+
+  <div class="product-image">
+    <img src="Remove BG.png">
+  </div>
+
+  <div class="product-buy">
+
+    <div class="product-box">
+      <h1>AUDI RS6</h1>
+      <div class="price">29.99€</div>
+      <button class="add-btn" onclick="addToCart()">Add to Cart</button>
     </div>
 
-    <div class="logo">
-      <img src="ScaleGarage.png" alt="Logo Scale Garage">
-    </div>
-  </header>
-
-  <main>
-    <div class="product-layout">
-      <div class="product-visual">
-        <img src="Remove BG.png" alt="Audi RS6">
-      </div>
-
-      <div class="product-buy-column">
-        <div class="info-box">
-          <h1>AUDI RS6</h1>
-          <div class="price-tag">29.99€</div>
-          <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
-        </div>
-        
-        <div class="info-box" style="flex-grow: 1; min-height: 120px; background: #080808;">
-          <p style="color: #666; font-size: 0.9em;">Échelle 1/32 - Édition Limitée</p>
-        </div>
-      </div>
+    <div class="product-box" style="background:#080808;">
+      <p style="color:#666;">Échelle 1/32 - Édition Limitée</p>
     </div>
 
-    <div class="product-description-footer">
-      <div class="desc-content">
-        <h3>Description</h3>
-        <p>Découvrez l'Audi RS6 dans sa version miniature 1/32. Peinture grise, coffre de toit fonctionnel et finitions intérieures .</p>
-      </div>
-    </div>
-  </main>
+  </div>
+</div>
 
-  <script>
-    /* Script du menu burger */
-    const menuBtn = document.getElementById('menu-btn');
-    const dropdown = document.getElementById('dropdown-menu');
+<div class="product-description">
+  <div class="product-description-box">
+    <h3>Description</h3>
+    <p>Découvrez l'Audi RS6 miniature 1/32 avec finitions détaillées et design premium.</p>
+  </div>
+</div>
 
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle('active');
-      menuBtn.classList.toggle('open');
-    });
+</main>
 
-    function addToCart() {
-      alert("Ajouté au panier !");
-    }
-  </script>
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const dropdown = document.getElementById('dropdown-menu');
+
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dropdown.classList.toggle('active');
+  menuBtn.classList.toggle('open');
+});
+
+function addToCart() {
+  alert("Ajouté au panier !");
+}
+</script>
+
 </body>
 </html>
