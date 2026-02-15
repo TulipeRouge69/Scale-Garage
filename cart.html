@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panier - Scale Garage</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ===== PAGE PANIER ===== */
+
+.cart-container {
+  max-width: 1200px;
+  margin: 100px auto 60px;
+  padding: 40px;
+  display: flex;
+  gap: 30px;
+}
+
+/* Liste produits */
+.cart-items {
+  flex: 2;
+  background: #111;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Item individuel */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #222;
+}
+
+.cart-item-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.cart-item h3 {
+  margin: 0;
+}
+
+.cart-price {
+  color: #bbb;
+}
+
+/* Bouton supprimer */
+.remove-btn {
+  background: transparent;
+  border: 1px solid #555;
+  color: #aaa;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.remove-btn:hover {
+  background: #222;
+  color: white;
+}
+
+/* Bloc résumé */
+.cart-summary {
+  flex: 1;
+  background: #000;
+  border-radius: 30px;
+  border: 1px solid #333;
+  padding: 40px;
+  height: fit-content;
+}
+
+.cart-summary h2 {
+  margin-bottom: 20px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .cart-container {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="menu-container">
+    <div class="menu-icon" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="dropdown" id="dropdown-menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="logo">
+    <img src="ScaleGarage.png" alt="Logo">
+  </div>
+</header>
+
+<main class="cart-container">
+
+  <!-- LISTE PRODUITS -->
+  <div class="cart-items">
+
+    <div class="cart-item">
+      <div class="cart-item-left">
+        <img src="Remove BG.png" alt="Audi RS6">
+        <div>
+          <h3>AUDI RS6</h3>
+          <div class="cart-price">29.99€</div>
+        </div>
+      </div>
+
+      <button class="remove-btn">Supprimer</button>
+    </div>
+
+  </div>
+
+  <!-- RÉSUMÉ -->
+  <div class="cart-summary">
+    <h2>Résumé</h2>
+
+    <div class="total-line">
+      <span>Total</span>
+      <span>29.99€</span>
+    </div>
+
+    <button class="checkout-btn">
+      Passer au paiement
+    </button>
+  </div>
+
+</main>
+
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const dropdown = document.getElementById('dropdown-menu');
+
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dropdown.classList.toggle('active');
+  menuBtn.classList.toggle('open');
+});
+</script>
+
+</body>
+</html>
