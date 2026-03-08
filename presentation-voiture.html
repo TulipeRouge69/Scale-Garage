@@ -7,6 +7,27 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+
+.back-arrow{
+position:fixed;
+top:20px;
+left:20px;
+font-size:28px;
+color:white;
+text-decoration:none;
+background:#111;
+padding:10px 15px;
+border-radius:15px;
+border:1px solid #333;
+transition:0.2s;
+z-index:1000;
+}
+
+.back-arrow:hover{
+background:#222;
+transform:scale(1.05);
+}
+
 .product-layout {
   display: flex;
   gap: 20px;
@@ -14,6 +35,7 @@
   max-width: 1200px;
   margin: 80px auto 20px;
 }
+
 .product-visual {
   flex: 2;
   background-color: #111;
@@ -24,13 +46,20 @@
   padding: 40px;
   border: 1px solid #333;
 }
-.product-visual img { max-width:100%; height:auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+
+.product-visual img { 
+max-width:100%; 
+height:auto; 
+filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); 
+}
+
 .product-buy-column {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+
 .info-box {
   background-color: #000;
   color: white;
@@ -39,8 +68,19 @@
   text-align: center;
   border: 1px solid #333;
 }
-.info-box h1 { margin:0 0 10px 0; font-size:28px; letter-spacing:1px; }
-.price-tag { font-size:22px; color:#bbb; margin-bottom:25px; }
+
+.info-box h1 { 
+margin:0 0 10px 0; 
+font-size:28px; 
+letter-spacing:1px; 
+}
+
+.price-tag { 
+font-size:22px; 
+color:#bbb; 
+margin-bottom:25px; 
+}
+
 .add-to-cart-btn {
   background-color: #fff;
   color: #000;
@@ -53,15 +93,41 @@
   font-size:18px;
   transition: 0.2s;
 }
-.add-to-cart-btn:hover { transform: scale(1.03); background-color:#f0f0f0; }
-.product-description-footer { max-width:1200px; margin:0 auto 60px; padding:0 40px; }
-.desc-content { background-color:#111; color:#ccc; padding:40px; border-radius:30px; border:1px solid #333; }
-.desc-content h3 { color:white; margin-top:0; }
-@media (max-width:850px) { .product-layout { flex-direction: column; padding:20px; } }
+
+.add-to-cart-btn:hover { 
+transform: scale(1.03); 
+background-color:#f0f0f0; 
+}
+
+.product-description-footer { 
+max-width:1200px; 
+margin:0 auto 60px; 
+padding:0 40px; 
+}
+
+.desc-content { 
+background-color:#111; 
+color:#ccc; 
+padding:40px; 
+border-radius:30px; 
+border:1px solid #333; 
+}
+
+.desc-content h3 { 
+color:white; 
+margin-top:0; 
+}
+
+@media (max-width:850px) { 
+.product-layout { flex-direction: column; padding:20px; } 
+}
+
 </style>
 </head>
 
 <body>
+
+<a href="index.html" class="back-arrow">←</a>
 
 <header class="header">
   <div class="menu-container">
@@ -89,7 +155,7 @@
 
   <div class="product-buy-column">
     <div class="info-box">
-      <h1>AUDI RS6</h1>
+      <h1>Audi RS6</h1>
       <div class="price-tag">29.99€</div>
       <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
     </div>
@@ -109,25 +175,33 @@
 </div>
 
 <script>
+
 const menuBtn = document.getElementById('menu-btn');
 const dropdown = document.getElementById('dropdown-menu');
+
 menuBtn.addEventListener('click', e => {
   e.stopPropagation();
   dropdown.classList.toggle('active');
   menuBtn.classList.toggle('open');
 });
 
-// Panier
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 const cartCount = document.getElementById('cart-count');
-function updateCartCount() { cartCount.textContent = cart.length; }
+
+function updateCartCount() {
+cartCount.textContent = cart.length;
+}
+
 function addToCart() {
   cart.push({name:"Audi RS6", price:29.99, img:"Remove BG.png"});
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
   alert("Audi RS6 ajouté au panier !");
 }
+
 updateCartCount();
+
 </script>
 
 </body>
