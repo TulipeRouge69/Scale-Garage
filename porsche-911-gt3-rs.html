@@ -7,6 +7,27 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+
+.back-arrow{
+position:fixed;
+top:20px;
+left:20px;
+font-size:28px;
+color:white;
+text-decoration:none;
+background:#111;
+padding:10px 15px;
+border-radius:15px;
+border:1px solid #333;
+transition:0.2s;
+z-index:1000;
+}
+
+.back-arrow:hover{
+background:#222;
+transform:scale(1.05);
+}
+
 .product-layout {
   display: flex;
   gap: 20px;
@@ -100,10 +121,13 @@
 @media (max-width:850px) { 
   .product-layout { flex-direction: column; padding:20px; } 
 }
+
 </style>
 </head>
 
 <body>
+
+<a href="index.html" class="back-arrow">←</a>
 
 <header class="header">
   <div class="menu-container">
@@ -159,16 +183,20 @@ menuBtn.addEventListener('click', e => {
   menuBtn.classList.toggle('open');
 });
 
-// Panier
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cart-count');
-function updateCartCount() { cartCount.textContent = cart.length; }
+
+function updateCartCount() {
+ cartCount.textContent = cart.length;
+}
+
 function addToCart() {
   cart.push({name:"Porsche 911 GT3 RS", price:39.99, img:"porsche-911-gt3-rs.png"});
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
   alert("Porsche 911 GT3 RS ajouté au panier !");
 }
+
 updateCartCount();
 </script>
 
